@@ -1,0 +1,145 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * nanara.my — editorial luxury design system.
+ * Warm ivory, soft beige, charcoal, muted gold.
+ * Serif display (Fraunces) + clean grotesque body (Karla).
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-muted: var(--gold-muted);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+}
+
+@theme {
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-sans: "Karla", "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(0.968 0.008 88);
+  --foreground: oklch(0.245 0.015 60);
+  --card: oklch(0.982 0.006 90);
+  --card-foreground: oklch(0.245 0.015 60);
+  --popover: oklch(0.982 0.006 90);
+  --popover-foreground: oklch(0.245 0.015 60);
+  --primary: oklch(0.245 0.015 60);
+  --primary-foreground: oklch(0.968 0.008 88);
+  --secondary: oklch(0.93 0.014 85);
+  --secondary-foreground: oklch(0.245 0.015 60);
+  --muted: oklch(0.94 0.012 86);
+  --muted-foreground: oklch(0.5 0.018 70);
+  --accent: oklch(0.93 0.014 85);
+  --accent-foreground: oklch(0.245 0.015 60);
+  --gold: oklch(0.68 0.095 82);
+  --gold-muted: oklch(0.6 0.07 80);
+  --destructive: oklch(0.577 0.2 27);
+  --destructive-foreground: oklch(0.968 0.008 88);
+  --border: oklch(0.875 0.012 80);
+  --input: oklch(0.875 0.012 80);
+  --ring: oklch(0.68 0.095 82);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: var(--primary-foreground);
+  }
+}
+
+/* Editorial helpers */
+
+@utility section-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-muted);
+}
+
+@utility display-serif {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+
+/* Scroll reveal */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Fine hairline rules with gold center mark */
+@utility rule-ornament {
+  position: relative;
+  height: 1px;
+  background: var(--border);
+}
