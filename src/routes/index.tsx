@@ -3,7 +3,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent, type SVGProps } from "react";
 
 const CONTACT_EMAIL = "hi@lembayu.com";
-const PRICE = "RM750";
+const PRICE = "RM880";
+const OFFER_PLACEHOLDER = `e.g. RM${(Number(PRICE.replace(/[^\d]/g, "")) - 80).toLocaleString("en-US")}`;
 const WEB3FORMS_ACCESS_KEY = "e852ee95-6808-4876-995c-9421a5f267c4";
 
 export const Route = createFileRoute("/")({
@@ -13,13 +14,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "nanara.my is for sale. A memorable, brandable six-letter .MY domain | RM750, sold securely via Escrow.com by the direct owner.",
+          "nanara.my is for sale. A memorable, brandable six-letter .MY domain | RM880, sold securely via Escrow.com by the direct owner.",
       },
       { property: "og:title", content: "nanara.my | Premium .MY Domain For Sale" },
       {
         property: "og:description",
         content:
-          "A memorable .MY domain ready for your next brand. RM750 · Secure via Escrow.com.",
+          "A memorable .MY domain ready for your next brand. RM880 · Secure via Escrow.com.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -213,7 +214,7 @@ function Hero() {
           </span>
           <span className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground">
             <IconShield className="size-4 text-gold-muted" />
-            Secure transaction via Escrow.com
+            Secure via Escrow.com · Fee split 50/50
           </span>
         </div>
 
@@ -349,7 +350,7 @@ const DETAILS: Array<[string, string]> = [
   ["Asking price", PRICE],
   ["Expiry date", "March 2027"],
   ["Ownership", "Direct owner"],
-  ["Transaction", "Secure via Escrow.com"],
+  ["Transaction", "Secure via Escrow.com · Fee split 50/50"],
 ];
 
 function DomainDetails() {
@@ -462,8 +463,8 @@ function Purchase() {
           </h2>
           <p className="mx-auto mt-5 max-w-lg text-[1.0625rem] leading-relaxed text-muted-foreground">
             Submit your details below and the seller will contact you directly. Every
-            transaction is completed securely through Escrow.com — escrow fees are paid
-            by the buyer.
+            transaction is completed securely through Escrow.com. Escrow fee split equally
+            between buyer and seller.
           </p>
         </div>
 
@@ -532,7 +533,7 @@ function Purchase() {
                   min="1"
                   required
                   className={inputClass}
-                  placeholder="e.g. 1800"
+                  placeholder={OFFER_PLACEHOLDER}
                 />
               </div>
             )}
@@ -626,7 +627,7 @@ function Footer() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xs font-bold tracking-[0.22em] text-muted-foreground uppercase">
           <span className="text-gold-muted">For sale</span>
-          <span>Secure via Escrow.com</span>
+          <span>Secure via Escrow.com · Fee split 50/50</span>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
             className="underline decoration-gold/50 underline-offset-4 transition-colors hover:text-foreground"

@@ -81,13 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "nanara.my is for sale. A memorable, brandable six-letter .MY domain — RM750, sold securely via Escrow.com.",
+          "nanara.my is for sale. A memorable, brandable six-letter .MY domain — RM880, sold securely via Escrow.com.",
       },
       { property: "og:title", content: "nanara.my — Premium .MY Domain For Sale" },
       {
         property: "og:description",
         content:
-          "A memorable .MY domain ready for your next brand. RM750 · Secure via Escrow.com.",
+          "A memorable .MY domain ready for your next brand. RM880 · Secure via Escrow.com.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "https://nanara.my/nanara.my-og-image.webp" },
