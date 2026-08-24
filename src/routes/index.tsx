@@ -180,7 +180,7 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden px-6 pt-40 pb-28 md:pt-52 md:pb-36">
+    <section id="top" className="relative flex min-h-[calc(100svh_-_4rem)] items-center overflow-hidden px-6 py-16 md:py-20">
       {/* faint gold halo */}
       <div
         aria-hidden
@@ -191,23 +191,23 @@ function Hero() {
         }}
       />
       <div className="relative mx-auto max-w-4xl text-center">
-        <p data-reveal className="section-eyebrow">
+        <p data-reveal className="section-eyebrow mt-2">
           Premium .MY domain — for sale
         </p>
         <h1
           data-reveal
-          className="display-serif mt-8 text-[clamp(3.5rem,11vw,8.5rem)] leading-none font-medium tracking-tight"
+          className="display-serif mt-3 text-[clamp(3.5rem,11vw,8.5rem)] leading-none font-medium tracking-tight"
         >
           nanara<span className="text-gold">.my</span>
         </h1>
         <p
           data-reveal
-          className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl"
+          className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl"
         >
           A memorable .MY domain ready for your next brand.
         </p>
 
-        <div data-reveal className="mt-12 flex flex-col items-center gap-2">
+        <div data-reveal className="mt-8 flex flex-col items-center gap-2">
           <span className="display-serif text-4xl font-medium md:text-5xl">{PRICE}</span>
           <span className="text-xs font-semibold tracking-[0.22em] text-muted-foreground uppercase">
             Asking price
@@ -218,7 +218,7 @@ function Hero() {
           </span>
         </div>
 
-        <div data-reveal className="mt-12 flex flex-col items-center gap-5">
+        <div data-reveal className="mt-8 flex flex-col items-center gap-5">
           <a
             href="#purchase"
             className="group inline-flex items-center gap-3 rounded-full bg-primary px-10 py-4 text-sm font-bold tracking-[0.18em] text-primary-foreground uppercase transition-all duration-300 hover:gap-4 hover:bg-foreground"
@@ -275,7 +275,7 @@ const WHY = [
 
 function WhyNanara() {
   return (
-    <section className="border-t border-border/60 px-6 py-24 md:py-32">
+    <section className="border-t border-border/60 px-6 py-20 md:py-24">
       <div className="mx-auto max-w-5xl">
         <div data-reveal className="max-w-xl">
           <p className="section-eyebrow">Why nanara?</p>
@@ -312,7 +312,7 @@ const INDUSTRIES = [
 
 function BuiltForBrand() {
   return (
-    <section className="border-t border-border/60 bg-secondary/40 px-6 py-24 md:py-32">
+    <section className="border-t border-border/60 bg-secondary/40 px-6 py-20 md:py-24">
       <div className="mx-auto grid max-w-5xl gap-14 md:grid-cols-2 md:gap-20">
         <div data-reveal>
           <p className="section-eyebrow">Built for a brand</p>
@@ -355,7 +355,7 @@ const DETAILS: Array<[string, string]> = [
 
 function DomainDetails() {
   return (
-    <section className="border-t border-border/60 px-6 py-24 md:py-32">
+    <section className="border-t border-border/60 px-6 py-20 md:py-24">
       <div className="mx-auto max-w-3xl">
         <div data-reveal className="text-center">
           <p className="section-eyebrow">Domain details</p>
@@ -454,7 +454,7 @@ function Purchase() {
     "mb-2 block text-xs font-bold tracking-[0.18em] text-muted-foreground uppercase";
 
   return (
-    <section id="purchase" className="border-t border-border/60 bg-secondary/40 px-6 py-24 md:py-32">
+    <section id="purchase" className="border-t border-border/60 bg-secondary/40 px-6 py-20 md:py-24">
       <div className="mx-auto max-w-2xl">
         <div data-reveal className="text-center">
           <p className="section-eyebrow">Make it yours</p>
