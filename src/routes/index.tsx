@@ -2,23 +2,23 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent, type SVGProps } from "react";
 
 const CONTACT_EMAIL = "hi@lembayu.com";
-const PRICE = "RM2,500";
-const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
+const PRICE = "RM750";
+const WEB3FORMS_ACCESS_KEY = "479ac2f1-d197-458b-a315-27b9ef8d12dc";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "nanara.my — Premium .MY Domain For Sale" },
+      { title: "nanara.my | Premium .MY Domain For Sale" },
       {
         name: "description",
         content:
-          "nanara.my is for sale. A memorable, brandable six-letter .MY domain — RM2,500, sold securely via Escrow.com by the direct owner.",
+          "nanara.my is for sale. A memorable, brandable six-letter .MY domain | RM750, sold securely via Escrow.com by the direct owner.",
       },
-      { property: "og:title", content: "nanara.my — Premium .MY Domain For Sale" },
+      { property: "og:title", content: "nanara.my | Premium .MY Domain For Sale" },
       {
         property: "og:description",
         content:
-          "A memorable .MY domain ready for your next brand. RM2,500 · Secure via Escrow.com.",
+          "A memorable .MY domain ready for your next brand. RM750 · Secure via Escrow.com.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -417,7 +417,7 @@ function Purchase() {
       });
       const result = await response.json();
       if (result.success) {
-        setStatus("Thanks — your message has been sent. The seller will be in touch shortly.");
+        setStatus("Thanks. Your message has been sent. The seller will be in touch shortly.");
         e.currentTarget.reset();
       } else {
         setStatus("Something went wrong. Please try again.");
