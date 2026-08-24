@@ -3,6 +3,7 @@ import { useEffect, useState, type FormEvent, type SVGProps } from "react";
 
 const CONTACT_EMAIL = "hi@lembayu.com";
 const PRICE = "RM2,500";
+const WEB3FORMS_ACCESS_KEY = "YOUR_WEB3FORMS_ACCESS_KEY";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -384,8 +385,9 @@ function DomainDetails() {
 
 function Purchase() {
   const [mode, setMode] = useState<"buy" | "offer">("buy");
+  const [status, setStatus] = useState<string | null>(null);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const name = String(data.get("name") ?? "");
@@ -398,23 +400,31 @@ function Purchase() {
       mode === "buy"
         ? `Purchase request — nanara.my (${PRICE})`
         : `Offer for nanara.my — RM${offer}`;
-    const body = [
-      `Mode: ${mode === "buy" ? `Buy at asking price (${PRICE})` : `Make an offer`}`,
-      `Full name: ${name}`,
-      `Email: ${email}`,
-      mode === "offer" ? `Offer (RM): ${offer}` : null,
-      `Intended use: ${use}`,
-      "",
-      message,
-      "",
-      "— Sent from the nanara.my sales page",
-    ]
-      .filter((line) => line !== null)
-      .join("\n");
 
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject,
+          name,
+          email,
+          offer: mode === "offer" ? `RM${offer}` : null,
+          use,
+          message,
+        }),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setStatus("Thanks — your message has been sent. The seller will be in touch shortly.");
+        e.currentTarget.reset();
+      } else {
+        setStatus("Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("Something went wrong. Please try again.");
+    }
   }
 
   const inputClass =
@@ -538,6 +548,15 @@ function Purchase() {
             {mode === "buy" ? `Request purchase — ${PRICE}` : "Submit offer"}
             <IconArrow className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
           </button>
+
+          {status && (
+            <p
+              role="status"
+              className="mt-6 text-center text-[0.8125rem] leading-relaxed text-muted-foreground"
+            >
+              {status}
+            </p>
+          )}
 
           <p className="mt-6 flex items-start justify-center gap-2 text-center text-[0.8125rem] leading-relaxed text-muted-foreground">
             <IconShield className="mt-0.5 size-4 shrink-0 text-gold-muted" />
