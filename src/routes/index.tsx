@@ -1,9 +1,10 @@
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type FormEvent, type SVGProps } from "react";
+import { useEffect, useRef, useState, type FormEvent, type SVGProps } from "react";
 
 const CONTACT_EMAIL = "hi@lembayu.com";
 const PRICE = "RM750";
-const WEB3FORMS_ACCESS_KEY = "479ac2f1-d197-458b-a315-27b9ef8d12dc";
+const WEB3FORMS_ACCESS_KEY = "e852ee95-6808-4876-995c-9421a5f267c4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,7 +22,7 @@ export const Route = createFileRoute("/")({
           "A memorable .MY domain ready for your next brand. RM750 · Secure via Escrow.com.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,
@@ -386,10 +387,22 @@ function DomainDetails() {
 function Purchase() {
   const [mode, setMode] = useState<"buy" | "offer">("buy");
   const [status, setStatus] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaError, setCaptchaError] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    if (isSubmitting) return;
+
+    if (!captchaToken) {
+      setCaptchaError("Please complete the captcha before submitting.");
+      return;
+    }
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
     const name = String(data.get("name") ?? "");
     const email = String(data.get("email") ?? "");
     const offer = String(data.get("offer") ?? "");
@@ -401,6 +414,7 @@ function Purchase() {
         ? `Purchase request — nanara.my (${PRICE})`
         : `Offer for nanara.my — RM${offer}`;
 
+    setIsSubmitting(true);
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -413,17 +427,23 @@ function Purchase() {
           offer: mode === "offer" ? `RM${offer}` : null,
           use,
           message,
+          "h-captcha-response": captchaToken,
         }),
       });
       const result = await response.json();
       if (result.success) {
         setStatus("Thanks. Your message has been sent. The seller will be in touch shortly.");
-        e.currentTarget.reset();
+        form.reset();
+        setCaptchaToken(null);
+        setCaptchaError(null);
+        captchaRef.current?.resetCaptcha();
       } else {
-        setStatus("Something went wrong. Please try again.");
+        setStatus(result.message || "Something went wrong. Please try again.");
       }
     } catch {
       setStatus("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -541,12 +561,35 @@ function Purchase() {
             </div>
           </div>
 
+          <div className="mt-8">
+            <HCaptcha
+              ref={captchaRef}
+              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+              reCaptchaCompat={false}
+              onVerify={(token) => {
+                setCaptchaToken(token);
+                setCaptchaError(null);
+              }}
+              onExpire={() => setCaptchaToken(null)}
+              onError={() => setCaptchaToken(null)}
+            />
+            {captchaError && (
+              <p
+                role="alert"
+                className="mt-3 text-center text-[0.8125rem] leading-relaxed text-muted-foreground"
+              >
+                {captchaError}
+              </p>
+            )}
+          </div>
+
           <button
             type="submit"
-            className="group mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-bold tracking-[0.18em] text-primary-foreground uppercase transition-all duration-300 hover:bg-foreground"
+            disabled={isSubmitting}
+            className="group mt-8 inline-flex w-full cursor-pointer items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 text-sm font-bold tracking-[0.18em] text-primary-foreground uppercase transition-all duration-200 ease-in-out enabled:hover:scale-[1.02] enabled:hover:brightness-110 enabled:active:scale-[0.98]"
           >
-            {mode === "buy" ? `Request purchase — ${PRICE}` : "Submit offer"}
-            <IconArrow className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+            {isSubmitting ? "Sending..." : mode === "buy" ? `Request purchase — ${PRICE}` : "Submit offer"}
+            <IconArrow className="size-4 transition-transform duration-200 ease-in-out group-hover:translate-x-1" />
           </button>
 
           {status && (
