@@ -1,29 +1,38 @@
-# Welcome to your Lovable project
+# nanara.my
 
-This project was built with [Lovable](https://lovable.dev).
+A premium `.MY` domain landing page for the sale of **nanara.my**.
 
-## Build with Lovable
+## Overview
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+A single-page landing page designed to showcase the domain, its brand potential and purchase options.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Domain:** nanara.my
+- **Extension:** .MY
+- **Status:** For Sale
+- **Asking Price:** RM880
+- **Transaction:** Secure via Escrow.com
+- **Ownership:** Direct owner
+- **Expiry:** March 2027
 
-## Development
+## Features
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+- Responsive one-page design
+- Buy now / make an offer flow
+- Web3Forms contact submission
+- hCaptcha spam protection
+- SEO metadata and Open Graph
+- JSON-LD structured data
+- XML sitemap and robots.txt
+- Vercel deployment
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+## Tech Stack
 
-## Built with
-
-- TanStack Start
-- TypeScript
 - React
+- TypeScript
+- TanStack Start
 - Tailwind CSS
+- Vercel
+
+## Live Website
+
+https://nanara.my/
