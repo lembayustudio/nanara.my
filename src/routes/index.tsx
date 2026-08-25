@@ -8,24 +8,6 @@ const OFFER_PLACEHOLDER = `e.g. RM${(Number(PRICE.replace(/[^\d]/g, "")) - 80).t
 const WEB3FORMS_ACCESS_KEY = "e852ee95-6808-4876-995c-9421a5f267c4";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "nanara.my | Premium .MY Domain For Sale" },
-      {
-        name: "description",
-        content:
-          "nanara.my is for sale. A memorable, brandable six-letter .MY domain | RM880, sold securely via Escrow.com by the direct owner.",
-      },
-      { property: "og:title", content: "nanara.my | Premium .MY Domain For Sale" },
-      {
-        property: "og:description",
-        content:
-          "A memorable .MY domain ready for your next brand. RM880 · Secure via Escrow.com.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
   component: Index,
 });
 
@@ -34,6 +16,7 @@ export const Route = createFileRoute("/")({
 type IconProps = SVGProps<SVGSVGElement>;
 
 const iconDefaults = {
+  "aria-hidden": "true" as const,
   viewBox: "0 0 24 24",
   fill: "none",
   stroke: "currentColor",
@@ -214,7 +197,16 @@ function Hero() {
           </span>
           <span className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground">
             <IconShield className="size-4 text-gold-muted" />
-            Secure via Escrow.com · Fee split 50/50
+            Secure via{" "}
+            <a
+              href="https://www.escrow.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-gold/50 underline-offset-4 transition-colors hover:text-foreground"
+            >
+              Escrow.com
+            </a>{" "}
+            · Fee split 50/50
           </span>
         </div>
 
@@ -378,6 +370,13 @@ function DomainDetails() {
             </div>
           ))}
         </dl>
+        <p
+          data-reveal
+          className="mt-6 text-center text-[0.8125rem] leading-relaxed text-muted-foreground"
+        >
+          This domain is owned directly by the seller and is transferred to you securely
+          once the Escrow.com transaction completes.
+        </p>
       </div>
     </section>
   );

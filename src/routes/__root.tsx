@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "nanara.my is for sale. A memorable, brandable six-letter .MY domain — RM880, sold securely via Escrow.com.",
+          "nanara.my is for sale. A memorable, brandable six-letter .MY domain — RM880, sold securely via Escrow.com by the direct owner.",
       },
       { property: "og:title", content: "nanara.my — Premium .MY Domain For Sale" },
       {
@@ -90,16 +90,73 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "A memorable .MY domain ready for your next brand. RM880 · Secure via Escrow.com.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://nanara.my/" },
       { property: "og:image", content: "https://nanara.my/nanara.my-og-image.webp" },
+      { property: "og:image:width", content: "1731" },
+      { property: "og:image:height", content: "909" },
+      {
+        property: "og:image:alt",
+        content: "nanara.my — Premium .MY domain for sale",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "nanara.my — Premium .MY Domain For Sale" },
+      {
+        name: "twitter:description",
+        content:
+          "A memorable .MY domain ready for your next brand. RM880 · Secure via Escrow.com.",
+      },
       { name: "twitter:image", content: "https://nanara.my/nanara.my-og-image.webp" },
+      {
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "nanara.my — Premium .MY Domain For Sale",
+          url: "https://nanara.my/",
+          primaryImageOfPage: {
+            "@type": "ImageObject",
+            url: "https://nanara.my/nanara.my-og-image.webp",
+            width: 1731,
+            height: 909,
+          },
+          mainEntity: {
+            "@type": "Offer",
+            price: 880,
+            priceCurrency: "MYR",
+            availability: "https://schema.org/InStock",
+            url: "https://nanara.my/",
+            itemOffered: {
+              "@type": "Product",
+              name: "nanara.my",
+              description:
+                "A memorable, brandable six-letter .MY domain name, sold directly by the owner via Escrow.com.",
+            },
+          },
+        },
+      },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "canonical", href: "https://nanara.my/" },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon_io/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon_io/favicon-16x16.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        href: "/favicon_io/apple-touch-icon.png",
+      },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
