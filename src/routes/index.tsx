@@ -563,17 +563,19 @@ function Purchase() {
           </div>
 
           <div className="mt-8">
-            <HCaptcha
-              ref={captchaRef}
-              sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
-              reCaptchaCompat={false}
-              onVerify={(token) => {
-                setCaptchaToken(token);
-                setCaptchaError(null);
-              }}
-              onExpire={() => setCaptchaToken(null)}
-              onError={() => setCaptchaToken(null)}
-            />
+            <div className="hcaptcha-wrap">
+              <HCaptcha
+                ref={captchaRef}
+                sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"
+                reCaptchaCompat={false}
+                onVerify={(token) => {
+                  setCaptchaToken(token);
+                  setCaptchaError(null);
+                }}
+                onExpire={() => setCaptchaToken(null)}
+                onError={() => setCaptchaToken(null)}
+              />
+            </div>
             {captchaError && (
               <p
                 role="alert"
@@ -625,9 +627,13 @@ function Footer() {
         <p className="display-serif text-lg text-muted-foreground italic">
           A name waiting for its brand.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-xs font-bold tracking-[0.22em] text-muted-foreground uppercase">
+        <div className="flex flex-col items-center justify-center gap-y-2 text-xs font-bold tracking-[0.22em] text-muted-foreground uppercase sm:flex-row sm:flex-wrap sm:gap-x-8">
           <span className="text-gold-muted">For sale</span>
-          <span>Secure via Escrow.com · Fee split 50/50</span>
+          <span className="text-center">
+            <span className="block sm:inline">Secure via Escrow.com</span>
+            <span className="hidden sm:inline"> · </span>
+            <span className="mt-1.5 block sm:mt-0 sm:inline">Fee split 50/50</span>
+          </span>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
             className="underline decoration-gold/50 underline-offset-4 transition-colors hover:text-foreground"

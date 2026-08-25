@@ -143,3 +143,49 @@
   height: 1px;
   background: var(--border);
 }
+
+/* --- hCaptcha: keep the widget inside the form card on all widths --- */
+
+.hcaptcha-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* react-hcaptcha renders a plain <div>; center its iframe within it */
+.hcaptcha-wrap > div {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.hcaptcha-wrap iframe {
+  flex: none;
+  transform-origin: center top;
+}
+
+/*
+ * The standard hCaptcha widget is 303px wide. The form's content area
+ * (viewport minus section px-6 and form p-7) drops below 303px on small
+ * phones, so scale the widget down — only when necessary — while keeping it
+ * centered and fully interactive. At ≥415px the widget fits without scaling.
+ */
+@media (max-width: 414px) {
+  .hcaptcha-wrap iframe {
+    transform: scale(0.92);
+  }
+}
+
+@media (max-width: 384px) {
+  .hcaptcha-wrap iframe {
+    transform: scale(0.81);
+  }
+}
+
+@media (max-width: 349px) {
+  .hcaptcha-wrap iframe {
+    transform: scale(0.71);
+  }
+}
